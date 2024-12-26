@@ -11,5 +11,9 @@ describe('isOnSearchPage', () => {
         const mockLocation: Location = { pathname: '/test/s/'} as Location
         vi.spyOn(global, 'location', 'get').mockReturnValue(mockLocation)
         expect(isOnSearchPage()).toBe(false)
+
+        const mockLocationTwo: Location = { pathname: '/search'} as Location
+        vi.spyOn(global, 'location', 'get').mockReturnValue(mockLocationTwo)
+        expect(isOnSearchPage()).toBe(false)
     })
 })
