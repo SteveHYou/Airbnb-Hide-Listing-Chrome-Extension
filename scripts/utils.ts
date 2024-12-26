@@ -5,6 +5,10 @@
  * When exporting functions, use "export function xyz()" syntax only.
  */
 
-export function isOnSearchPage() {
+/**
+ * /s path for search
+ * @returns 
+ */
+export function isOnSearchPage(): boolean {
     return /^\/s\//.test(window.location.pathname)
 }
