@@ -6,5 +6,16 @@
     "action": {
         "default_popup": "popup/hello.html",
         "default_icon": "popup/hello_extensions.png"
-    }
+    },
+    "content_scripts": [
+        {
+            "js":["dist/scripts/content.js"],
+            "matches":[
+                "https://airbnb.ca/*",
+                "https://www.airbnb.ca/*",
+                "https://airbnb.com/*",
+                "https://www.airbnb.com/*"
+            ]
+        }
+    ]
 }
