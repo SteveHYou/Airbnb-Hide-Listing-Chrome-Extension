@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/SteveHYou/Airbnb-Hide-Listing-Chrome-Extension#readme",
   "devDependencies": {
+    "chrome-types": "^0.1.327",
     "typescript": "^5.7.2"
   }
 }
