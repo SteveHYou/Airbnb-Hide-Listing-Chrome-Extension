@@ -1,4 +1,4 @@
-import { isOnSearchPage } from "../../scripts/utils"
+import { isOnSearchPage } from "../../src/utils/isOnSearchPage"
 
 describe('isOnSearchPage', () => {
     it('returns true when on search page', () => {
