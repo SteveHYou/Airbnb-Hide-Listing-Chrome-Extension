@@ -24,5 +24,8 @@
             "dist/src/*"
         ]
     }],
-    "permissions": ["tabs", "activeTab"]
+    "permissions": ["tabs", "activeTab"],
+    "background": {
+        "service_worker": "dist/src/background.js"
+    }
 }
