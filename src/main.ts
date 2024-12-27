@@ -13,6 +13,11 @@ import { isOnSearchPage } from "./utils/isOnSearchPage.js"
  * This function should contain all content_script logic.
  */
 export default function() {
+    if (!isOnSearchPage()) {
+        console.log(`Not on search page. Exiting.`)
+        return
+    }
+
     console.log(`isOnSearchPage: ${isOnSearchPage()}`)
     console.log('hello')
 }
