@@ -11,5 +11,11 @@
  */
 (async () => {
     const main = await import(chrome.runtime.getURL('dist/src/main.js'));
-    main.default()
+    chrome.runtime.onMessage.addListener((message: any, sender: any, sendResponse: any) => {
+      if (message && message.message === 'Tab updated') {
+        console.log(`tab updated: ${JSON.stringify(message)}`)
+        main.default()
+        return true
+      }
+    })
   })();
