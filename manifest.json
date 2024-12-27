@@ -9,7 +9,7 @@
     },
     "content_scripts": [
         {
-            "js":["dist/scripts/content.js"],
+            "js":["dist/src/content_script.js"],
             "matches":[
                 "https://airbnb.ca/*",
                 "https://www.airbnb.ca/*",
@@ -21,7 +21,7 @@
     "web_accessible_resources": [{
         "matches": ["<all_urls>"],
         "resources": [
-            "dist/scripts/utils.js"
+            "dist/src/*"
         ]
     }],
     "permissions": ["tabs", "activeTab"]
