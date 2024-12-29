@@ -1,5 +1,5 @@
-import { searchListingEleQuery, urlWithinSearchListingQuery as urlEleQueryWithinSearchListing } from "../constants"
-import { SearchListing } from "../types/SearchListing"
+import { searchListingEleQuery, urlWithinSearchListingQuery as urlEleQueryWithinSearchListing } from "../constants.js"
+import { SearchListing } from "../types/SearchListing.js"
 
 /**
  * Parses current page's HTML to build SearchListing objs
