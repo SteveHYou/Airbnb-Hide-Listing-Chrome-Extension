@@ -26,6 +26,7 @@
     }],
     "permissions": ["tabs", "activeTab"],
     "background": {
-        "service_worker": "dist/src/background.js"
+        "service_worker": "dist/src/background.js",
+        "type": "module"
     }
 }

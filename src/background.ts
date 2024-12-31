@@ -1,3 +1,9 @@
+/**
+ * Service workers can use modules as defined in manifest.json.
+ * So no need to worry about dynamic imports like within content script, but 
+ * ESM modules still require file extensions on imports.
+ */
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     /**
      * When onUpdated is triggered from 'complete' status, it doesn't populate changeInfo.url since it's separate from url change
