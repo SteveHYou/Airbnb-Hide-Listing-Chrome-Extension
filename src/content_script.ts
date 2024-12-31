@@ -11,7 +11,7 @@
  */
 
 chrome.runtime.onMessage.addListener((message: any, sender: any, sendResponse: any) => {
-  if (message?.message === 'Tab updated') {
+  if (message?.message === 'Tab updated') {  // Ideally this string should be part of constant.ts but don't want to deal with another dynamic import scenario :(
     console.log(`Tab updated: ${JSON.stringify(message)}`);
     (async () => {
       /**
