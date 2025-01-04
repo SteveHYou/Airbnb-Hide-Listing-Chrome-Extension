@@ -4,10 +4,10 @@ import { SearchListing } from "../types/SearchListing.js"
 /**
  * Parses current page's HTML to build SearchListing objs
  */
-export function getSearchListings(): SearchListing[] | undefined {
+export function getSearchListings(): SearchListing[] {
     const eles = document.querySelectorAll(searchListingEleQuery)
     if (!eles || eles.length <= 0) {
-        return
+        return []
     }
 
     return [...eles].map(ele => {

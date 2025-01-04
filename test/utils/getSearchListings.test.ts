@@ -8,21 +8,20 @@ describe('getSearchListings', () => {
         document.body.innerHTML = ''
     })
 
-    it('returns undefined if no search listings on page', () => {
+    it('returns empty array if no search listings on page', () => {
         document.body.innerHTML = `
         <html>
             <div id='random'>Random content</div>
         </html>
         `
         const listings = getSearchListings()
-        expect(listings).toBeUndefined()
+        expect(listings).toHaveLength(0)
     })
 
     it('returns array of SearchListing if valid listings on page', () => {
         document.body.innerHTML = readFileSync(path.resolve(`test/mocks/html/full/search-hongdae-20250404-to-20250427-on-20241229.html`), 'utf8')
         const listings = getSearchListings()
         expect(listings).toHaveLength(18)
-        expect(listings?.[0]).not.toBeUndefined()
         expect(listings?.[0].element).toBeInstanceOf(HTMLElement)
         expect(listings?.[0].listingId).toStrictEqual('47821617')
     })
