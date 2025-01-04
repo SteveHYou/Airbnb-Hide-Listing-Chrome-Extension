@@ -1,7 +1,10 @@
 # Airbnb-Hide-Listing-Chrome-Extension
+Purpose:
+- Prepare for a fun travel by solving a real problem I am facing, and also get more hands-on experience with TDD with unit testable code.
 
 Rules:
 - Use named exports only, for ease of refactoring.
+- No webpack :)
 
 
 Troubleshooting FAQ:
