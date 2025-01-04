@@ -5,6 +5,16 @@ Rules:
 
 
 Troubleshooting FAQ:
+- Extension behaviour not reflecting properly on webpage
+    - Open a new tab whenever refreshing an extension! Refreshing page on same tab won't reflect the change (There's probably a way to resolve it though)
+
+- MutationObserver from content script is inconsistently adding buttons
+    - As of MV3, there is a significant delay before content scripts actually get injected into the page. At this point, the page could've already loaded a lot of data which we cannot detect as a new change from MutationObserver. Sometimes it loads early enough but most times it doesn't
+    - Others are facing same issue: https://github.com/crxjs/chrome-extension-tools/issues/391
+    - Potential solution #1: Use service worker to directly inject the script into page?
+        - Not sure if it will work and seems like a pain...
+    - Potential solution #2: Don't use MutationObserver. Just use simple setInterval() to add in the buttons if they are missing. If the page didn't see any new listings load in the past 10 seconds, clear the setInterval()
+
 - Uncaught (in promise) TypeError: Failed to fetch dynamically imported module: chrome-extension://piibfkamejcgnkjjimllmjiipfjmhaph/dist/src/main.js
     - FIX: Make sure content script imports have .js file extension
 
