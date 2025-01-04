@@ -1,13 +1,14 @@
 import { searchListingEleQuery, urlWithinSearchListingQuery as urlEleQueryWithinSearchListing } from "../constants.js"
 import { SearchListing } from "../types/SearchListing.js"
+import { getHideButtonId } from "./getHideButtonId.js"
 
 /**
  * Parses current page's HTML to build SearchListing objs
  */
-export function getSearchListings(): SearchListing[] | undefined {
+export function getSearchListings(): SearchListing[] {
     const eles = document.querySelectorAll(searchListingEleQuery)
     if (!eles || eles.length <= 0) {
-        return
+        return []
     }
 
     return [...eles].map(ele => {
@@ -34,6 +35,7 @@ export function convertElementToSearchListing(ele: Element): SearchListing | und
     const searchListing: SearchListing = {
         element: ele,
         listingId,
+        hideBtn: getHideButtonFromSearchListing(listingId),
     }
     return searchListing
 }
@@ -55,4 +57,31 @@ export function getListingIdFromSearchListing(ele: Element): string | undefined 
     }
     return url.split('/rooms/')?.[1]
         ?.match(/^\d+/)?.[0] // Grabs all numeric digits from beginning of string
+}
+
+export function getHideButtonFromSearchListing(listingId: string): HTMLElement | undefined {
+    if (!listingId) {
+        throw new Error(`getHideButtonFromSearchListing(): Valid listingId must be passed in`)
+    }
+
+    const hideBtns = document.querySelectorAll(`${searchListingEleQuery} button#${getHideButtonId(listingId)}`)
+    if (!hideBtns || hideBtns.length <= 0) {
+        console.log(`getHideButtonFromSearchListing(): No hide buttons found from listing ID [${listingId}]`)
+        return
+    }
+    if (hideBtns.length > 1) {
+        /**
+         * If this happens:
+         * - Ensure there is only one hide button on the screen for specific listing
+         * - Hide button query is unique enough
+         */
+        throw new Error(`getHideButtonFromSearchListing(): Found more than 1 hide button for listing ID [${listingId}].`)
+    }
+
+    const hideBtn = hideBtns[0]
+    if (!(hideBtn instanceof HTMLElement)) {
+        console.log(`getHideButtonFromSearchListing(): Found an element from listing ID [${listingId}] but it wasn't an HTMLElement.`)
+        return
+    }
+    return hideBtn
 }
