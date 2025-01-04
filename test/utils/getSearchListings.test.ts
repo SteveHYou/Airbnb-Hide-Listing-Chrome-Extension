@@ -1,7 +1,8 @@
 import { readFileSync } from 'fs';
 import path from 'path';
 import { searchListingEleQuery } from '../../src/constants';
-import { convertElementToSearchListing, getListingIdFromSearchListing, getSearchListings } from '../../src/utils/getSearchListings';
+import { convertElementToSearchListing, getHideButtonFromSearchListing, getListingIdFromSearchListing, getSearchListings } from '../../src/utils/getSearchListings';
+import { getHideButtonId } from '../../src/utils/getHideButtonId';
 
 describe('getSearchListings', () => {
     beforeEach(() => {
@@ -72,4 +73,34 @@ describe('getListingIdFromSearchListing', () => {
 
     it.todo(`returns undefined if element is not an HTMLElement`, () => {})
     it.todo(`returns undefined if element doesn't contain listing ID`, () => {})
+})
+
+describe('getHideButtonFromSearchListing', () => {
+    const listingId = '47821617'
+    const hideBtnQuery = `${searchListingEleQuery} button#${getHideButtonId(listingId)}`
+
+    it(`throws error if listingId wasn't passed in`, () => {
+        expect(() => getHideButtonFromSearchListing(undefined as unknown as string)).toThrowError()
+    })
+
+    it(`throws error if multiple hide buttons were found`, () => {
+        document.body.innerHTML = readFileSync(path.resolve(`test/mocks/html/partial/single-search-listing-with-hide-button-duplicate.html`), 'utf8')
+        let hideBtns = document.querySelectorAll(hideBtnQuery)
+        expect(hideBtns).toHaveLength(2) // Verify mock data
+        expect(() => getHideButtonFromSearchListing(listingId)).toThrowError()
+    })
+
+    it('fetches hide button if displayed', () => {
+        document.body.innerHTML = readFileSync(path.resolve(`test/mocks/html/partial/single-search-listing-with-hide-button.html`), 'utf8')
+        let hideBtns = document.querySelectorAll(hideBtnQuery)
+        expect(hideBtns).toHaveLength(1) // Verify mock data
+        expect(getHideButtonFromSearchListing(listingId)).toBeInstanceOf(HTMLElement)
+    })
+
+    it('returns undefined if not displayed', () => {
+        document.body.innerHTML = readFileSync(path.resolve(`test/mocks/html/partial/single-search-listing.html`), 'utf8')
+        let hideBtns = document.querySelectorAll(hideBtnQuery)
+        expect(hideBtns).toHaveLength(0) // Verify mock data
+        expect(getHideButtonFromSearchListing(listingId)).toBeUndefined()
+    })
 })
