@@ -4,12 +4,8 @@ export function createElement(
     id: string,
     onclick: (event: MouseEvent) => any,
     attributeToAdd: { attributeName: string, attributeValue: string}
-): HTMLElement | undefined {
+): HTMLElement {
     const ele = document.createElement(tagName)
-    if (!(ele instanceof HTMLElement)) {
-        console.error(`createElement(): Failed to create HTMLElement. tagName: [${tagName}] textContent: [${textContent}] id: [${id}] attributeToAdd: [${JSON.stringify(attributeToAdd)}]`)
-        return
-    }
     ele.textContent = textContent
     ele.id = id
     ele.onclick = onclick
