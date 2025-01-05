@@ -7,7 +7,7 @@ describe(`createElement`, () => {
         const listingId = '47821617'
         const tagName: keyof HTMLElementTagNameMap = 'button'
         const textContent = 'Hide'
-        const id = `${searchListingEleQuery} button#${getHideButtonId(listingId)}`
+        const id = getHideButtonId(listingId)
         let onclick = vi.fn()
 
         const ele = createElement(
@@ -20,7 +20,7 @@ describe(`createElement`, () => {
                 attributeValue: listingId
             }
         )
-        
+
         expect(ele).not.toBeUndefined()
         expect(ele?.tagName).toStrictEqual(tagName.toUpperCase())
         expect(ele?.textContent).toStrictEqual(textContent)
@@ -28,6 +28,4 @@ describe(`createElement`, () => {
         ele?.click(); expect(onclick).toHaveBeenCalledOnce()
         expect(ele?.getAttribute(LISTING_ID_ATTRIBUTE_NAME)).toStrictEqual(listingId)
     })
-
-    it.todo(`returns undefined if HTMLElement wasn't created`, () => {})
 })
