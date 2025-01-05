@@ -7,6 +7,7 @@
  * infrastructure seems too cumbersome.
  */
 import { isOnSearchPage } from "./utils/isOnSearchPage.js"
+import { addHideBtnToPage } from "./utils/addHideBtnToPage.js"
 
 /**
  * See src/content_scripts.ts for the purpose of this file.
@@ -17,5 +18,7 @@ export default function() {
         console.log(`Not on search page. Exiting.`)
         return
     }
+    addHideBtnToPage()
+    
     console.log(`isOnSearchPage: ${isOnSearchPage(window.location.href)}`)
 }

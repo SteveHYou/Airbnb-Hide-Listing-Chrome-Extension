@@ -35,3 +35,6 @@ Troubleshooting FAQ:
     - Apart from the fix, if using async operations within a onMessage listener (Using any promise or async func), make sure sendResponse() is called at least once AND "true" boolean is returned in all branching logic. Otherwise it will cause this same error because sendMessage() will never receive a response it's looking for.
         - Using async within listener: https://stackoverflow.com/a/46628145
 
+
+- Things to be tested in E2E test
+    - Page switching should successfully load contents from next page, with Hide buttons connected to the new listings

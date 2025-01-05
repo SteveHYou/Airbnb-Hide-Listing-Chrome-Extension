@@ -36,6 +36,7 @@ export function convertElementToSearchListing(ele: Element): SearchListing | und
         element: ele,
         listingId,
         hideBtn: getHideButtonFromSearchListing(listingId),
+        isElementHidden: ele.hidden,
     }
     return searchListing
 }
