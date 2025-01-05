@@ -5,6 +5,7 @@ import { getSearchListings } from "./getSearchListings.js";
 import { onclickHideButton } from "./onclickHideButton.js";
 
 export function addHideBtnToPage() {
+    // TODO: Not sure if to stop the setInterval after some time?
     const interval = setInterval(() => {
         const listings = getSearchListings()
         listings?.forEach(l => {
