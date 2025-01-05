@@ -43,6 +43,7 @@ describe('convertElementToSearchListing', () => {
         expect(searchListing).not.toBeUndefined()
         expect(searchListing?.element).toBeInstanceOf(HTMLElement)
         expect(searchListing?.listingId).toStrictEqual('47821617')
+        expect(searchListing?.isElementHidden).toBe(false)
     })
 
     it('generates undefined from an invalid element', () => {
@@ -54,6 +55,22 @@ describe('convertElementToSearchListing', () => {
         const searchListing = convertElementToSearchListing(document.querySelector('div') as Element)
         expect(searchListing).toBeUndefined()
     })
+
+    it(`returns isElementHidden as true if element is hidden`, () => {
+        let mockEles: NodeListOf<Element>
+        document.body.innerHTML = readFileSync(path.resolve(`test/mocks/html/partial/single-search-listing.html`), 'utf8')
+        mockEles = document.querySelectorAll(searchListingEleQuery)
+        expect(mockEles).toHaveLength(1); // Verify mock data
+
+        (mockEles[0] as HTMLElement).hidden = true
+        const listing = convertElementToSearchListing(mockEles[0])
+        expect(listing?.isElementHidden).toBe(true);
+
+        (mockEles[0] as HTMLElement).hidden = false
+        const listingAfterHiddenFalse = convertElementToSearchListing(mockEles[0])
+        expect(listingAfterHiddenFalse?.isElementHidden).toBe(false);
+    })
+
 
     it.todo(`returns undefined if element is not an HTMLElement`, () => {})
 })
