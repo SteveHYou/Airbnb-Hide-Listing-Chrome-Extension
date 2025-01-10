@@ -85,7 +85,7 @@ export async function add(tableName: TableName, data: BaseModel): Promise<void> 
         rows.push(data)
         await chrome.storage.local.set({ [tableName]: rows})
     } catch(err) {
-        console.error(`addRow(): Error while creating adding data to table [${tableName}] with data [${JSON.stringify(data)}]... Error: ${err}`)
+        console.error(`add(): Error while creating adding data to table [${tableName}] with data [${JSON.stringify(data)}]... Error: ${err}`)
         throw err
     }
 }

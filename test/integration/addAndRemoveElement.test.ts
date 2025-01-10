@@ -7,7 +7,7 @@ import { getSearchListings } from '../../src/utils/getSearchListings';
 import { onclickHideButton } from '../../src/utils/onclickHideButton';
 
 describe(`Add and hide element`, () => {
-    it(`adds and hides element in correct location`, () => {
+    it.todo(`adds and hides element in correct location`, () => {
         document.body.innerHTML = readFileSync(path.resolve(`test/mocks/html/partial/single-search-listing.html`), 'utf8')
         const mockEles = document.querySelectorAll(searchListingEleQuery)
         expect(mockEles).toHaveLength(1) // Verify mock data

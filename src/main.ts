@@ -8,6 +8,8 @@
  */
 import { isOnSearchPage } from "./utils/isOnSearchPage.js"
 import { addHideBtnToPage } from "./utils/addHideBtnToPage.js"
+import { createTable, dropTable } from "./utils/database/chromeStorageLocalDb.js"
+import { hideListings } from "./utils/hideListings.js"
 
 /**
  * See src/content_scripts.ts for the purpose of this file.
@@ -18,6 +20,15 @@ export default async function() {
         console.log(`Not on search page. Exiting.`)
         return
     }
+    // await dropTable('HiddenListing')
+    // console.log(`Current storage: ${JSON.stringify(await chrome.storage.local.get())}`)
+
+    /**
+     * Probably table should be created one time after installing the extension instead of putting here
+     * But let's keep it simple...
+     */
+    await createTable('HiddenListing')
+    hideListings()
     addHideBtnToPage()
     console.log(`isOnSearchPage: ${isOnSearchPage(window.location.href)}`)
 }

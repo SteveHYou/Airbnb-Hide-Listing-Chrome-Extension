@@ -9,7 +9,7 @@
     },
     "content_scripts": [
         {
-            "js":["dist/src/content_script.js"],
+            "js":["dist/src/utils/lib/setIntervalAsync.js", "dist/src/content_script.js"],
             "matches":[
                 "https://airbnb.ca/*",
                 "https://www.airbnb.ca/*",
