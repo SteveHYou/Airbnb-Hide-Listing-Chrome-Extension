@@ -1,13 +1,13 @@
 # Airbnb-Hide-Listing-Chrome-Extension
-Purpose:
+## Purpose:
 - Prepare for a fun travel by solving a real problem I am facing, and also get more hands-on experience with TDD with unit testable code.
 
-Rules:
+## Rules:
 - Use named exports only, for ease of refactoring.
 - No webpack :)
 
 
-Troubleshooting FAQ:
+## Troubleshooting FAQ:
 - Extension behaviour not reflecting properly on webpage
     - Open a new tab whenever refreshing an extension! Refreshing page on same tab won't reflect the change (There's probably a way to resolve it though)
 
@@ -36,6 +36,15 @@ Troubleshooting FAQ:
         - Using async within listener: https://stackoverflow.com/a/46628145
     - This also means it happens if any exceptions are thrown in chrome.runtime.onMessage.addListener, before sendMessage() can be called
 
+- How to load Javascript CDN file which provides a variable in global scope
+    - First of all, CDNs are not allowed in manifest v3. Just put the library files directly in project, even if it's not desired practice.
+    - Be sure to load the file via manifest.json. I use the lib in a content script file, so added the lib in content_scripts.js array. 
+        - Make sure the lib is defined first in the array as it needs to load it first, then content script can use the global variable
+    - Typescript doesn't compile standalone js files properly. Define a .d.ts file for every standalone Javascript file, so Typescript knows what to do with it. Without it, tsc was terminating compilation prematurely.
+    - In tsconfig.json, set allowJs to true. Without this, TS won't know to move the js file to the output folder (in my case, ./dist folder)
+    - After all this, I was able to use the SetIntervalAsync global variable injected by the lib js file.
+        - Thank you https://github.com/ealmansi/set-interval-async! Awesome project.
 
-- Things to be tested in E2E test
-    - Page switching should successfully load contents from next page, with Hide buttons connected to the new listings
+
+## Things to be tested in E2E test
+- Page switching should successfully load contents from next page, with Hide buttons connected to the new listings
