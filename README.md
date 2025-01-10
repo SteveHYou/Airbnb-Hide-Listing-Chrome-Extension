@@ -34,6 +34,7 @@ Troubleshooting FAQ:
     - FIX: See Reason 2 of "Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist."
     - Apart from the fix, if using async operations within a onMessage listener (Using any promise or async func), make sure sendResponse() is called at least once AND "true" boolean is returned in all branching logic. Otherwise it will cause this same error because sendMessage() will never receive a response it's looking for.
         - Using async within listener: https://stackoverflow.com/a/46628145
+    - This also means it happens if any exceptions are thrown in chrome.runtime.onMessage.addListener, before sendMessage() can be called
 
 
 - Things to be tested in E2E test
