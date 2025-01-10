@@ -9,6 +9,7 @@
 import { isOnSearchPage } from "./utils/isOnSearchPage.js"
 import { addHideBtnToPage } from "./utils/addHideBtnToPage.js"
 import { createTable, dropTable } from "./utils/database/chromeStorageLocalDb.js"
+import { hideListings } from "./utils/hideListings.js"
 
 /**
  * See src/content_scripts.ts for the purpose of this file.
@@ -27,6 +28,7 @@ export default async function() {
      * But let's keep it simple...
      */
     await createTable('HiddenListing')
+    hideListings()
     addHideBtnToPage()
     console.log(`isOnSearchPage: ${isOnSearchPage(window.location.href)}`)
 }
