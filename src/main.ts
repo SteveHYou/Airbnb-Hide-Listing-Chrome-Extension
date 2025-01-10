@@ -13,12 +13,11 @@ import { addHideBtnToPage } from "./utils/addHideBtnToPage.js"
  * See src/content_scripts.ts for the purpose of this file.
  * This function should contain all content_script logic.
  */
-export default function() {
+export default async function() {
     if (!isOnSearchPage(window.location.href)) {
         console.log(`Not on search page. Exiting.`)
         return
     }
     addHideBtnToPage()
-    
     console.log(`isOnSearchPage: ${isOnSearchPage(window.location.href)}`)
 }

@@ -18,8 +18,13 @@ chrome.runtime.onMessage.addListener((message: any, sender: any, sendResponse: a
        * Ideally import should be done once but performance impact is probably minimal
        * and would rather not worry about caching the import
        */
-      const main = await import(chrome.runtime.getURL('dist/src/main.js'))
-      main.default()
+      try {
+        const main = await import(chrome.runtime.getURL('dist/src/main.js'))
+        await main.default()
+      } catch(err) {
+        // Maybe additional logging not required here as we'd get exception errors from previous throws
+      }
+
       sendResponse('Finished processing Tab updated')
     })();
   } else {
